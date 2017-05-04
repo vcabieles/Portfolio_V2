@@ -12,7 +12,7 @@
             $stateProvider
                 .state('app', {
                     url: "/home",
-                    templateUrl: "/home/home.html",
+                    templateUrl: "/templates/home/videos.html",
                     controller: "homeCtrl",
                     controllerAs: "home"
                 })

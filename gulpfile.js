@@ -3,8 +3,8 @@ var nodemon = require('gulp-nodemon');
 var sass = require("gulp-sass");
 var concat = require('gulp-concat');
 
-var controllerSources = ['./public/home/*.js'];
-var angularScripts = ['./src/javascript/main.js','./src/javascript/config.router.js'];
+var controllerSources = ['./src/**/**.**.js'];
+var angularScripts = ['./src/javascript/**.js'];
 
 gulp.task('css', function() {
     return gulp.src('sass/*.scss')
@@ -16,10 +16,16 @@ gulp.task('watch', function() {
     gulp.watch('sass/*.scss', ['css']);
     gulp.watch(controllerSources, ["controllers"]);
     gulp.watch(angularScripts, ["scripts"]);
+    gulp.watch("./src/**",['moveStatics'])
 });
 
+gulp.task('moveStatics', [], function() {
+    console.log("Moving all files in styles folder");
+    gulp.src("./src/**/**.html")
+        .pipe(gulp.dest('public/tpls'));
+});
 
-gulp.task('start',['watch'], function () {
+gulp.task('start', ["moveStatics"], function () {
     nodemon({
         script: 'bin/www',
         ext: 'js html',
@@ -42,4 +48,4 @@ gulp.task('controllers', function() {
         .pipe(gulp.dest('./public/js/'));
 });
 
-gulp.task('default', ['css','start']);
+gulp.task('default', ['controllers','scripts','css','start','watch']);
