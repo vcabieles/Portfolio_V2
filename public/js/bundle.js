@@ -25,7 +25,7 @@ angular.module('app', [
             $stateProvider
                 .state('app', {
                     url: "/home",
-                    templateUrl: "/templates/home/videos.html",
+                    templateUrl: "/tpls/home/home.html",
                     controller: "homeCtrl",
                     controllerAs: "home"
                 })
